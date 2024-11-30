@@ -15,16 +15,25 @@ function createGameboard() {
     return {display};
 }
 
-function createPlayer(name, mark) {
-    return {name, mark}
+function Player(name, mark) {
+    this.name = name;
+    this.mark = mark;
 }
 
-const game = createGameboard();
-const playerOne = createPlayer("Kyle", "X");
-const playerTwo = createPlayer("Hanz", "O");
+function createPlayers(playerOneName, playerTwoName) {
+    const playerOne = new Player(playerOneName, "X");
+    const playerTwo = new Player(playerTwoName, "O");
 
-game.display();
-console.log(playerOne.name);
-console.log(playerOne.mark);
-console.log(playerTwo.name);
-console.log(playerTwo.mark);
+    return {playerOne, playerTwo};
+}
+
+function gameStart() {
+    const gameboard = createGameboard();
+    const players = createPlayers("Kyle", "Hanz");
+    let currentPlayer = players.playerOne;
+
+    gameboard.display();
+    console.log(`It's ${currentPlayer.name}'s turn!`);
+}
+
+gameStart();
