@@ -15,10 +15,8 @@ function createGameboard() {
     function updateCell(x, y, mark) {
         if (x < 0 || x > 2 || y < 0 || y > 2) {
             console.log("Out of bounds.");
-            return 0;
         } else if (board[x][y] != null) {
             console.log("Cell already taken.");
-            return 0;
         } else {
             board[x][y] = mark;
             return 1;
@@ -33,17 +31,12 @@ function Player(name, mark) {
     this.mark = mark;
 }
 
-function createPlayers(playerOneName, playerTwoName) {
-    const playerOne = new Player(playerOneName, "X");
-    const playerTwo = new Player(playerTwoName, "O");
-
-    return {playerOne, playerTwo};
-}
-
 function gameStart() {
     const gameboard = createGameboard();
-    const players = createPlayers("Kyle", "Hanz");
-    let currentPlayer = players.playerOne;
+    const playerOne = new Player("Kyle", "X");
+    const playerTwo = new Player("Hanz", "O");
+
+    let currentPlayer = playerOne;
 
     function roundStart() {
         gameboard.display();
@@ -57,7 +50,7 @@ function gameStart() {
     }
 
     function switchTurn() {
-        currentPlayer = currentPlayer == players.playerOne ? players.playerTwo : players.playerOne;
+        currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
     }
 
     return {roundStart, placeMark};
