@@ -23,7 +23,22 @@ function createGameboard() {
         }
     }
 
-    return {display, updateCell};
+    function checkWinningMark() {
+        //row win condition
+	    for (const row of board) {
+            if ((row.every((cell) => (cell !== null && cell === row[0]))) === true) {
+			    return row[0];
+            }
+        } 
+        //column win condition
+        for (i = 0; i < 3; i++) {
+            if ((board.every((row) => (row[i] !== null && row[i] === board[0][i]))) === true) {
+                return board[0][i];
+            }
+        }
+    }
+
+    return {display, updateCell, checkWinningMark};
 }
 
 function Player(name, mark) {
@@ -40,7 +55,13 @@ function gameStart() {
 
     function roundStart() {
         gameboard.display();
-        console.log(`It's ${currentPlayer.name}'s turn!`);
+        if (gameboard.checkWinningMark() === "X") {
+            console.log(`${playerOne.name} wins!`);
+        } else if (gameboard.checkWinningMark() === "O") {
+            console.log(`${playerTwo.name} wins!`);
+        } else {
+            console.log(`It's ${currentPlayer.name}'s turn!`);
+        }
     }
 
     function placeMark(row, col) {
