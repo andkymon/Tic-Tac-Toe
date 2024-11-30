@@ -15,5 +15,16 @@ function createGameboard() {
     return {display};
 }
 
+function createPlayer(name, mark) {
+    return {name, mark}
+}
+
 const game = createGameboard();
+const playerOne = createPlayer("Kyle", "X");
+const playerTwo = createPlayer("Hanz", "O");
+
 game.display();
+console.log(playerOne.name);
+console.log(playerOne.mark);
+console.log(playerTwo.name);
+console.log(playerTwo.mark);
