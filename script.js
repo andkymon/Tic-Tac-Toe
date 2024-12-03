@@ -50,7 +50,13 @@ function createGameboard() {
         return null;
     }
 
-    return {display, updateCell, checkWinningMark};
+    function reset() {
+        for (const row of board) {
+            row.fill(null);
+        }
+    }
+
+    return {display, updateCell, checkWinningMark, reset};
 }
 
 function Player(name, mark) {
@@ -69,8 +75,10 @@ function gameStart() {
         gameboard.display();
         if (gameboard.checkWinningMark() === "X") {
             console.log(`${playerOne.name} wins!`);
+            gameboard.reset();
         } else if (gameboard.checkWinningMark() === "O") {
             console.log(`${playerTwo.name} wins!`);
+            gameboard.reset();
         } else {
             console.log(`It's ${currentPlayer.name}'s turn!`);
         }
