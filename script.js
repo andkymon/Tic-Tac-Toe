@@ -66,10 +66,10 @@ function Player(name, mark) {
     this.mark = mark;
 }
 
-function gameStart() {
+function gameStart(name1, name2) {
     const gameboard = createGameboard();
-    const playerOne = new Player("Kyle", "X");
-    const playerTwo = new Player("Hanz", "O");
+    const playerOne = new Player(name1, "X");
+    const playerTwo = new Player(name2, "O");
     let round = 1;
 
     let currentPlayer = playerOne;
@@ -108,5 +108,5 @@ function gameStart() {
 }
 
 
-const game = gameStart();
+const game = gameStart("Kyle", "Hanz");
 game.roundStart();
