@@ -68,20 +68,28 @@ function gameStart() {
     const gameboard = createGameboard();
     const playerOne = new Player("Kyle", "X");
     const playerTwo = new Player("Hanz", "O");
+    let round = 0;
 
     let currentPlayer = playerOne;
 
     function roundStart() {
+        round++;
+        console.log(round);
         gameboard.display();
-        if (gameboard.checkWinningMark() === "X") {
-            console.log(`${playerOne.name} wins!`);
-            gameboard.reset();
-        } else if (gameboard.checkWinningMark() === "O") {
-            console.log(`${playerTwo.name} wins!`);
-            gameboard.reset();
-        } else {
-            console.log(`It's ${currentPlayer.name}'s turn!`);
-        }
+        if (round > 5) { //Wins are only checked starting round 6, as it takes 5 turns minimum for a win.
+            const winner = gameboard.checkWinningMark();
+            if (winner === "X") {
+                console.log(`${playerOne.name} wins!`);
+            } else if (winner === "O") {
+                console.log(`${playerTwo.name} wins!`);
+            }
+            if (winner) {
+                gameboard.reset();
+                round = 0;
+                return;
+            }
+        } 
+        console.log(`It's ${currentPlayer.name}'s turn!`);
     }
 
     function placeMark(row, col) {
