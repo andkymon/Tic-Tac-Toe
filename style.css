@@ -1,0 +1,60 @@
+/*Self-Hosted Fonts*/
+@font-face {
+    font-family: logo;
+    src: url("assets/fonts/logo.woff2") format('woff2');
+  }
+  
+@font-face {
+font-family: open-sans;
+src: url("assets/fonts/opensans.woff2") format('woff2');
+}
+
+/*Variables*/
+:root {
+    --board-size: 500px;
+}
+
+body {
+    height: 100vh;
+    background-color: #101820;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body > h1 {
+    color: white;
+    font-family: logo, sans-serif;
+    font-size: 2rem;
+    margin: 64px 0;
+}
+
+.board {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    height: var(--board-size);
+    width: var(--board-size);
+}
+
+.cell {
+    border: 1px solid white;
+}
+
+.top.cell {
+    border-top: none;
+}
+
+.right.cell {
+    border-right: none;
+}
+
+.bottom.cell {
+    border-bottom: none;
+}
+
+.left.cell {
+    border-left: none;
+}
+
