@@ -31,11 +31,23 @@ function createGameboard() {
             }
         } 
         //column win condition
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < board.length; i++) {
             if ((board.every((row) => (row[i] !== null && row[i] === board[0][i]))) === true) {
                 return board[0][i];
             }
         }
+        //diagonal top left to bottom right win condition
+        const diag1 = board.map((row, index) => row[index]);
+        if ((diag1.every((cell) => cell === diag1[0])) === true) {
+            return diag1[0];
+        }
+        //diagonal top right to bottom left win condition
+        const diag2 = board.map((row, index) => row[board.length - 1 - index]); 
+        if ((diag2.every((cell) => cell === diag2[0])) === true) {
+            return diag2[0];
+        }
+        //No winner yet
+        return null;
     }
 
     return {display, updateCell, checkWinningMark};
