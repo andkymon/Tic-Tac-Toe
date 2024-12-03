@@ -17,6 +17,8 @@ function createGameboard() {
             console.log("Out of bounds.");
         } else if (board[x][y] != null) {
             console.log("Cell already taken.");
+        } else if (!Number.isInteger(x) || !Number.isInteger(y)) {
+            console.log("Invalid input.");
         } else {
             board[x][y] = mark;
             return 1;
@@ -68,15 +70,14 @@ function gameStart() {
     const gameboard = createGameboard();
     const playerOne = new Player("Kyle", "X");
     const playerTwo = new Player("Hanz", "O");
-    let round = 0;
+    let round = 1;
 
     let currentPlayer = playerOne;
 
     function roundStart() {
-        round++;
         console.log(round);
         gameboard.display();
-        if (round > 5) { //Wins are only checked starting round 6, as it takes 5 turns minimum for a win.
+        if (round > 5) { //Wins are only checked after 5 rounds, as it takes 5 turns minimum for a win.
             const winner = gameboard.checkWinningMark();
             if (winner === "X") {
                 console.log(`${playerOne.name} wins!`);
@@ -100,6 +101,7 @@ function gameStart() {
 
     function switchTurn() {
         currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
+        round++;
     }
 
     return {roundStart, placeMark};
