@@ -72,6 +72,8 @@ const game = (function () {
 
     function gameStart(name1, name2) {
         gameboard.reset();
+        if (name1 == "") name1 = "Player 1";
+        if (name2 == "") name2 = "Player 2";
         const playerOne = new Player(name1, "X");
         const playerTwo = new Player(name2, "O");
         round = 1;
@@ -108,4 +110,24 @@ const game = (function () {
         round++;
     }
     return {gameStart, placeMark};
-});
+})();
+
+displayController = (function () {
+    function displayStart() {
+        const nameDialog = document.querySelector(".name-dialog");
+        const p1Name = document.querySelector("#p1-name");
+        const p2Name = document.querySelector("#p2-name");
+        const startBtn = document.querySelector(".start-button");
+
+        nameDialog.showModal();
+
+        startBtn.addEventListener("click", () => {
+            console.log(p1Name.value);
+            game.gameStart(p1Name.value, p2Name.value);
+            nameDialog.close();
+        })
+    }
+    return {displayStart};
+})();
+
+displayController.displayStart();
