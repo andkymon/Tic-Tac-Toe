@@ -68,14 +68,16 @@ function Player(name, mark) {
 
 const game = (function () {
     let round;
+    let playerOne;
+    let playerTwo;
     let currentPlayer;
 
     function gameStart(name1, name2) {
         gameboard.reset();
         if (name1 == "") name1 = "Player 1";
         if (name2 == "") name2 = "Player 2";
-        const playerOne = new Player(name1, "X");
-        const playerTwo = new Player(name2, "O");
+        playerOne = new Player(name1, "X");
+        playerTwo = new Player(name2, "O");
         round = 1;
         currentPlayer = playerOne;
         roundStart();
@@ -92,7 +94,6 @@ const game = (function () {
                 console.log(`${playerTwo.name} wins!`);
             }
             if (winner) {
-                gameboard.gameStart();
                 return;
             }
         } 
