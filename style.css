@@ -23,9 +23,9 @@ body {
     justify-content: center;
 }
 
-body > h1 {
+.game-status {
     color: white;
-    font-family: logo, sans-serif;
+    font-family: open-sans, sans-serif;
     font-size: 2rem;
     margin: 64px 0;
 }
