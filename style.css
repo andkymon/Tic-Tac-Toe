@@ -41,6 +41,14 @@ body > h1 {
 .cell {
     color: white;
     border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.cell:hover {
+    cursor: pointer;
 }
 
 .top.cell {
