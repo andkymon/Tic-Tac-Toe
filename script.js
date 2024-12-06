@@ -1,4 +1,4 @@
-function createGameboard() {
+const gameboard = (function () {
     const board = [];
 
     for (let i = 0; i < 3; i++) {
@@ -25,7 +25,7 @@ function createGameboard() {
         }
     }
 
-    function checkWinningMark() {
+    function checkWin() {
         //row win condition
 	    for (const row of board) {
             if ((row.every((cell) => (cell !== null && cell === row[0]))) === true) {
@@ -59,34 +59,38 @@ function createGameboard() {
     }
 
     return {display, updateCell, checkWinningMark, reset};
-}
+})();
 
 function Player(name, mark) {
     this.name = name;
     this.mark = mark;
 }
 
-function gameStart(name1, name2) {
-    const gameboard = createGameboard();
-    const playerOne = new Player(name1, "X");
-    const playerTwo = new Player(name2, "O");
-    let round = 1;
+const game = (function () {
+    let round;
+    let currentPlayer;
 
-    let currentPlayer = playerOne;
+    function gameStart(name1, name2) {
+        gameboard.reset();
+        const playerOne = new Player(name1, "X");
+        const playerTwo = new Player(name2, "O");
+        round = 1;
+        currentPlayer = playerOne;
+        roundStart();
+    }
 
     function roundStart() {
         console.log(round);
         gameboard.display();
         if (round > 5) { //Wins are only checked after 5 rounds, as it takes 5 turns minimum for a win.
-            const winner = gameboard.checkWinningMark();
+            const winner = gameboard.checkWin();
             if (winner === "X") {
                 console.log(`${playerOne.name} wins!`);
             } else if (winner === "O") {
                 console.log(`${playerTwo.name} wins!`);
             }
             if (winner) {
-                gameboard.reset();
-                round = 0;
+                gameboard.gameStart();
                 return;
             }
         } 
@@ -103,10 +107,5 @@ function gameStart(name1, name2) {
         currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
         round++;
     }
-
-    return {roundStart, placeMark};
-}
-
-
-const game = gameStart("Kyle", "Hanz");
-game.roundStart();
+    return {gameStart, placeMark};
+});
