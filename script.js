@@ -137,7 +137,6 @@ const display = (function () {
             game.start(p1Name.value, p2Name.value);
             nameDialog.close();
             setCellEventListeners();
-            updateDisplay();
         })
     }
     
