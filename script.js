@@ -90,7 +90,7 @@ const game = (function () {
     function roundStart() {
         console.log(round);
         gameboard.display();
-        displayController.updateDisplay();
+        display.updateDisplay();
         if (round > 5) { //Wins are only checked after 5 rounds, as it takes 5 turns minimum for a win.
             const winner = gameboard.checkWin();
             if (winner === "X") {
@@ -118,7 +118,9 @@ const game = (function () {
     return {start, placeMark};
 })();
 
-const displayController = (function () {
+const display = (function () {
+    const cells = document.querySelectorAll(".cell");
+
     function start() {
         const nameDialog = document.querySelector(".name-dialog");
         const p1Name = document.querySelector("#p1-name");
@@ -130,17 +132,29 @@ const displayController = (function () {
         startBtn.addEventListener("click", () => {
             game.start(p1Name.value, p2Name.value);
             nameDialog.close();
+            setCellEventListeners();
             updateDisplay();
         })
     }
+    
+    function setCellEventListeners() {
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                const index = row * 3 + col;
+                cells[index].addEventListener("click", () => {
+                    game.placeMark(row, col);
+                });
+            }
+        }
+    }
+
     function updateDisplay() {
         const board = gameboard.getBoard();
-        const cells = document.querySelectorAll(".cell");
-        for(i = 0; i < board.length; i++) {
+        for (let i = 0; i < board.length; i++) {
             cells[i].textContent = board[i];
         }
     }
     return {start, updateDisplay};
 })();
 
-displayController.start();
+display.start();
