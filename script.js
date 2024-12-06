@@ -102,6 +102,10 @@ const game = (function () {
                 return;
             }
         } 
+        if (round > 9) {
+            console.log(`It's a draw!`);
+            return;
+        }
         console.log(`It's ${currentPlayer.name}'s turn!`);
     }
 
@@ -141,9 +145,8 @@ const display = (function () {
         for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 3; col++) {
                 const index = row * 3 + col;
-                cells[index].addEventListener("click", () => {
-                    game.placeMark(row, col);
-                });
+                const mark = () => game.placeMark(row, col);
+                cells[index].addEventListener("click", mark);
             }
         }
     }
