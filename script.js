@@ -88,25 +88,22 @@ const game = (function () {
     }
 
     function roundStart() {
-        console.log(round);
-        gameboard.display();
-        display.updateDisplay();
         if (round > 5) { //Wins are only checked after 5 rounds, as it takes 5 turns minimum for a win.
             const winner = gameboard.checkWin();
             if (winner === "X") {
-                console.log(`${playerOne.name} wins!`);
+                display.updateDisplay(`${playerOne.name} wins!`);
             } else if (winner === "O") {
-                console.log(`${playerTwo.name} wins!`);
+                display.updateDisplay(`${playerTwo.name} wins!`);
             }
             if (winner) {
                 return;
             }
         } 
         if (round > 9) {
-            console.log(`It's a draw!`);
+            display.updateDisplay(`It's a draw!`);
             return;
         }
-        console.log(`It's ${currentPlayer.name}'s turn!`);
+        display.updateDisplay(`It's ${currentPlayer.name}'s turn!`);
     }
 
     function placeMark(row, col) {
@@ -150,7 +147,9 @@ const display = (function () {
         }
     }
 
-    function updateDisplay() {
+    function updateDisplay(str) {
+        const gameStatus = document.querySelector(".game-status");
+        gameStatus.textContent = str;
         const board = gameboard.getBoard();
         for (let i = 0; i < board.length; i++) {
             cells[i].textContent = board[i];
