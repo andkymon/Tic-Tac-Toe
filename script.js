@@ -72,7 +72,7 @@ const game = (function () {
     let playerTwo;
     let currentPlayer;
 
-    function gameStart(name1, name2) {
+    function start(name1, name2) {
         gameboard.reset();
         if (name1 == "") name1 = "Player 1";
         if (name2 == "") name2 = "Player 2";
@@ -110,11 +110,11 @@ const game = (function () {
         currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
         round++;
     }
-    return {gameStart, placeMark};
+    return {start, placeMark};
 })();
 
-displayController = (function () {
-    function displayStart() {
+const displayController = (function () {
+    function start() {
         const nameDialog = document.querySelector(".name-dialog");
         const p1Name = document.querySelector("#p1-name");
         const p2Name = document.querySelector("#p2-name");
@@ -124,11 +124,11 @@ displayController = (function () {
 
         startBtn.addEventListener("click", () => {
             console.log(p1Name.value);
-            game.gameStart(p1Name.value, p2Name.value);
+            game.start(p1Name.value, p2Name.value);
             nameDialog.close();
         })
     }
-    return {displayStart};
+    return {start};
 })();
 
-displayController.displayStart();
+displayController.start();
