@@ -39,6 +39,7 @@ body > h1 {
 }
 
 .cell {
+    color: white;
     border: 1px solid white;
 }
 
