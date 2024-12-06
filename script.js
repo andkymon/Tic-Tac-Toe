@@ -58,7 +58,7 @@ const gameboard = (function () {
         }
     }
 
-    return {display, updateCell, checkWinningMark, reset};
+    return {display, updateCell, checkWin, reset};
 })();
 
 function Player(name, mark) {
