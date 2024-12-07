@@ -38,13 +38,13 @@ const gameboard = (function () {
         }
         //diagonal top left to bottom right win condition
         const diag1 = board.map((row, index) => row[index]);
-        if ((diag1.every((cell) => cell === diag1[0])) === true) {
+        if ((diag1.every((cell) => (cell !== null && cell === diag1[0]))) === true) {
             display.resultHighlight("diag1");
             return diag1[0];
         }
         //diagonal top right to bottom left win condition
         const diag2 = board.map((row, index) => row[board.length - 1 - index]); 
-        if ((diag2.every((cell) => cell === diag2[0])) === true) {
+        if ((diag2.every((cell) => (cell !== null && cell === diag2[0]))) === true) {
             display.resultHighlight("diag2");
             return diag2[0];
         }
