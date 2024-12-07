@@ -146,8 +146,7 @@ const display = (function () {
             }
         }
         const restartBtn = document.querySelector(".restart");
-        const restartGame = () => start();
-        restartBtn.addEventListener("click", restartGame);
+        restartBtn.addEventListener("click", start);
     }
 
     function updateDisplay(str) {
