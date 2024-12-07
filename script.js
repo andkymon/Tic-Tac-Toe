@@ -169,7 +169,7 @@ const display = (function () {
     }
 
     function removeCellEventListeners() {
-        for (i = 0; i < cells.length; i++) {
+        for (let i = 0; i < cells.length; i++) {
             cells[i].removeEventListener("click", cellClickHandlers[i]);
         }
     }
