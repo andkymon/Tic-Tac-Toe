@@ -134,7 +134,6 @@ const display = (function () {
 
         startBtn.addEventListener("click", () => {
             game.start(p1Name.value, p2Name.value);
-            startDialog.close();
             setEventListeners();
         })
     }
