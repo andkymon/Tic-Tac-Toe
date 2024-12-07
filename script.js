@@ -147,8 +147,10 @@ const display = (function () {
                 cells[index].addEventListener("click", mark);
             }
         }
-        const restartBtn = document.querySelector(".restart.mid");
-        restartBtn.addEventListener("click", start);
+        const restartBtns = document.querySelectorAll(".restart");
+        for (const btn of restartBtns) {
+            btn.addEventListener("click", start);
+        }
     }
 
     function updateDisplay(str) {
@@ -163,11 +165,6 @@ const display = (function () {
     function end() {
         const endDialog = document.querySelector(".end-dialog");
         endDialog.showModal();
-        const restartBtn = document.querySelector(".restart.end");
-        restartBtn.addEventListener("click", () => {
-            endDialog.close();
-            start();
-        });
     }
 
     return {start, updateDisplay, end};

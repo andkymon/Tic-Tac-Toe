@@ -19,7 +19,7 @@
         <div class="cell row-3 col-2"></div>
         <div class="cell row-3 col-3"></div>
     </div>
-    <button class="restart mid">Restart Game</button>
+    <button class="restart">Restart Game</button>
     <dialog class="start-dialog">
         <h1>Play Tic-Tac-Toe</h1>
         <form class="start-form">
@@ -39,8 +39,10 @@
         </div>
     </dialog>
     <dialog class="end-dialog">
-        <h1>Game Over</h1>
-        <button class="restart end">Restart Game</button>
+        <form>
+            <h1>Game Over</h1>
+            <button class="restart" formmethod="dialog">Restart Game</button>
+        </form>
     </dialog>
     <script src="script.js"></script>
 </body>
