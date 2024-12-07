@@ -96,13 +96,13 @@ const game = (function () {
                 display.updateDisplay(`${playerTwo.name} wins!`);
             }
             if (winner) {
-                display.end();
+                display.removeCellEventListeners();
                 return;
             }
         } 
         if (round > 9) {
             display.updateDisplay(`It's a draw!`);
-            display.end();
+            display.removeCellEventListeners();
             return;
         }
         display.updateDisplay(`It's ${currentPlayer.name}'s turn!`);
@@ -122,36 +122,27 @@ const game = (function () {
 })();
 
 const display = (function () {
+    //References accessed in multiple functions
+    const startDialog = document.querySelector(".start-dialog");
+    const p1Name = document.querySelector("#p1-name");
+    const p2Name = document.querySelector("#p2-name");
     const cells = document.querySelectorAll(".cell");
 
-    function start() {
-        const startDialog = document.querySelector(".start-dialog");
-        const p1Name = document.querySelector("#p1-name");
-        const p2Name = document.querySelector("#p2-name");
+    //Event handlers to be set once on page load and never removed
+    function setup() {
         const startBtn = document.querySelector(".start-button");
+        const restartBtn = document.querySelector(".restart");
+        startBtn.addEventListener("click", () => {
+            setCellEventListeners();
+            game.start(p1Name.value, p2Name.value);
+            startDialog.close();
+        });
+        restartBtn.addEventListener("click", start);
+    }
 
+    function start() {
         startDialog.showModal();
         p1Name.blur();
-
-        startBtn.addEventListener("click", () => {
-            game.start(p1Name.value, p2Name.value);
-            setEventListeners();
-            startDialog.close();
-        })
-    }
-    
-    function setEventListeners() {
-        for (let row = 0; row < 3; row++) {
-            for (let col = 0; col < 3; col++) {
-                const index = row * 3 + col;
-                const mark = () => game.placeMark(row, col);
-                cells[index].addEventListener("click", mark);
-            }
-        }
-        const restartBtns = document.querySelectorAll(".restart");
-        for (const btn of restartBtns) {
-            btn.addEventListener("click", start);
-        }
     }
 
     function updateDisplay(str) {
@@ -163,12 +154,31 @@ const display = (function () {
         }
     }
 
-    function end() {
-        const endDialog = document.querySelector(".end-dialog");
-        endDialog.showModal();
+    //Store references to store and remove cell event handlers
+    const cellClickHandlers = []; 
+    
+    function setCellEventListeners() {
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                const index = row * 3 + col;
+                const mark = () => game.placeMark(row, col);
+                cellClickHandlers[index] = mark;
+                cells[index].addEventListener("click", cellClickHandlers[index]);
+            }
+        }
     }
 
-    return {start, updateDisplay, end};
+    function removeCellEventListeners() {
+        for (i = 0; i < cells.length; i++) {
+            cells[i].removeEventListener("click", cellClickHandlers[i]);
+        }
+    }
+    return {setup, start, updateDisplay, removeCellEventListeners};
 })();
 
-display.start();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    display.setup();
+    display.start();
+});
