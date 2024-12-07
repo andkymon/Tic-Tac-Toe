@@ -133,11 +133,11 @@ const display = (function () {
         startBtn.addEventListener("click", () => {
             game.start(p1Name.value, p2Name.value);
             nameDialog.close();
-            setCellEventListeners();
+            setEventListeners();
         })
     }
     
-    function setCellEventListeners() {
+    function setEventListeners() {
         for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 3; col++) {
                 const index = row * 3 + col;
@@ -145,6 +145,9 @@ const display = (function () {
                 cells[index].addEventListener("click", mark);
             }
         }
+        const restartBtn = document.querySelector(".restart");
+        const restartGame = () => start();
+        restartBtn.addEventListener("click", restartGame);
     }
 
     function updateDisplay(str) {
