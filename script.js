@@ -131,6 +131,7 @@ const display = (function () {
         const startBtn = document.querySelector(".start-button");
 
         startDialog.showModal();
+        p1Name.blur();
 
         startBtn.addEventListener("click", () => {
             game.start(p1Name.value, p2Name.value);
