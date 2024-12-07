@@ -183,6 +183,16 @@ body {
     transition: 0.3s;
 }
 
+.cell.winner {
+    background-color: #00D100;
+    transition: 0.3s;
+}
+
+.cell.draw {
+    background-color: red;
+    transition: 0.3s;
+}
+
 .cell:hover {
     cursor: pointer;
 }

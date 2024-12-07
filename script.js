@@ -25,23 +25,27 @@ const gameboard = (function () {
         //row win condition
 	    for (const row of board) {
             if ((row.every((cell) => (cell !== null && cell === row[0]))) === true) {
-			    return row[0];
+			    display.resultHighlight("row", board.indexOf(row));
+                return row[0];
             }
         } 
         //column win condition
         for (i = 0; i < board.length; i++) {
             if ((board.every((row) => (row[i] !== null && row[i] === board[0][i]))) === true) {
+                display.resultHighlight("col", i);
                 return board[0][i];
             }
         }
         //diagonal top left to bottom right win condition
         const diag1 = board.map((row, index) => row[index]);
         if ((diag1.every((cell) => cell === diag1[0])) === true) {
+            display.resultHighlight("diag1");
             return diag1[0];
         }
         //diagonal top right to bottom left win condition
         const diag2 = board.map((row, index) => row[board.length - 1 - index]); 
         if ((diag2.every((cell) => cell === diag2[0])) === true) {
+            display.resultHighlight("diag2");
             return diag2[0];
         }
         //No winner yet
@@ -94,6 +98,7 @@ const game = (function () {
         } 
         if (round > 9) {
             display.updateDisplay(`It's a draw!`);
+            display.resultHighlight("draw");
             display.removeCellEventListeners();
             return;
         }
@@ -135,6 +140,7 @@ const display = (function () {
     function start() {
         for (const cell of cells) {
             cell.classList.remove("clicked");
+            cell.classList.remove("winner");
         }
         startDialog.showModal();
         p1Name.blur();
@@ -171,7 +177,40 @@ const display = (function () {
             cells[i].removeEventListener("click", cellClickHandlers[i]);
         }
     }
-    return {setup, start, updateDisplay, removeCellEventListeners};
+
+    function resultHighlight(direction, index = null) {
+        switch(direction){
+            case "row":
+                for (let i = 0; i < 3; i++) {
+                    cells[(index * 3) + i].classList.add("winner");
+                }
+                break;
+            case "col":
+                for (let i = 0; i < 3; i++) {
+                    cells[index + (i * 3)].classList.add("winner");
+                }
+                break;
+            case "diag1":
+                for (let i = 0; i < 3; i++) {
+                    cells[i * 4].classList.add("winner");
+                }
+                break;
+            case "diag2":
+                for (let i = 0; i < 3; i++) {
+                    cells[(i + 1) * 2].classList.add("winner");
+                }
+                break;
+            case "draw": 
+                for (const cell of cells) {
+                    cell.classList.add("draw");
+                }
+                break;
+            default:
+                console.error("Invalid direction:", direction);
+        }
+    }
+
+    return {setup, start, updateDisplay, removeCellEventListeners, resultHighlight};
 })();
 
 
