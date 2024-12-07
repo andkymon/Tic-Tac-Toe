@@ -123,16 +123,16 @@ const display = (function () {
     const cells = document.querySelectorAll(".cell");
 
     function start() {
-        const nameDialog = document.querySelector(".name-dialog");
+        const startDialog = document.querySelector(".start-dialog");
         const p1Name = document.querySelector("#p1-name");
         const p2Name = document.querySelector("#p2-name");
         const startBtn = document.querySelector(".start-button");
 
-        nameDialog.showModal();
+        startDialog.showModal();
 
         startBtn.addEventListener("click", () => {
             game.start(p1Name.value, p2Name.value);
-            nameDialog.close();
+            startDialog.close();
             setEventListeners();
         })
     }
