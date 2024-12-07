@@ -172,10 +172,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(4rem, 12vw, 7rem);
+    font-size: 1px;
     line-height: 1;
     font-family: Fredoka, sans-serif;
     text-shadow: var(--default-shadow);
+}
+
+.cell.clicked {
+    font-size: clamp(4rem, 12vw, 7rem);
+    transition: 0.3s;
 }
 
 .cell:hover {

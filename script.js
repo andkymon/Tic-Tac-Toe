@@ -133,6 +133,9 @@ const display = (function () {
     }
 
     function start() {
+        for (const cell of cells) {
+            cell.classList.remove("clicked");
+        }
         startDialog.showModal();
         p1Name.blur();
     }
@@ -153,7 +156,10 @@ const display = (function () {
         for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 3; col++) {
                 const index = row * 3 + col;
-                const mark = () => game.placeMark(row, col);
+                const mark = () => {
+                    cells[index].classList.add("clicked");
+                    game.placeMark(row, col);
+                };
                 cellClickHandlers[index] = mark;
                 cells[index].addEventListener("click", cellClickHandlers[index]);
             }
