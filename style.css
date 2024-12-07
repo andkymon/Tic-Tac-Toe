@@ -148,7 +148,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 128px;
+    gap: 64px;
 }
 
 .game-status {
