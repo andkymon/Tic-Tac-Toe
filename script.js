@@ -12,17 +12,9 @@ const gameboard = (function () {
         return board.flat(Infinity);
     }
 
-    function display() {
-        console.log(board);
-    }
-
     function updateCell(x, y, mark) {
-        if (x < 0 || x > 2 || y < 0 || y > 2) {
-            console.log("Out of bounds.");
-        } else if (board[x][y] != null) {
+        if (board[x][y] != null) {
             console.log("Cell already taken.");
-        } else if (!Number.isInteger(x) || !Number.isInteger(y)) {
-            console.log("Invalid input.");
         } else {
             board[x][y] = mark;
             return 1;
@@ -62,7 +54,7 @@ const gameboard = (function () {
         }
     }
 
-    return {getBoard, display, updateCell, checkWin, reset};
+    return {getBoard, updateCell, checkWin, reset};
 })();
 
 function Player(name, mark) {
