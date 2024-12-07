@@ -141,6 +141,7 @@ const display = (function () {
         for (const cell of cells) {
             cell.classList.remove("clicked");
             cell.classList.remove("winner");
+            cell.classList.remove("draw");
         }
         startDialog.showModal();
         p1Name.blur();
@@ -212,7 +213,6 @@ const display = (function () {
 
     return {setup, start, updateDisplay, removeCellEventListeners, resultHighlight};
 })();
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
