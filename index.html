@@ -21,22 +21,24 @@
     </div>
     <button class="restart">Restart Game</button>
     <dialog class="start-dialog">
-        <h1>Play Tic-Tac-Toe</h1>
-        <form class="start-form">
-            <label for="p1-name">
-                Player 1:
-                <br>
-                <input type="text" id="p1-name" name="p1-name">
-            </label>
-            <label for="p2-name">
-                Player 2:
-                <br>
-                <input type="text" id="p2-name" name="p2-name">
-            </label>
-            <div class="start-button-container">
-                <button class="start-button" formmethod="dialog">Start</button>
+        <div class="container">
+            <h1>Tic-Tac-Toe</h1>
+            <div class="players container">
+                <div class="input container">
+                    <input type="text" id="p1-name" name="p1-name" placeholder="Player 1">
+                    <br>
+                    <span class="player-symbol">X</span>
+                </div>
+                <div class="input container">
+                    <input type="text" id="p2-name" name="p2-name" placeholder="Player 2">
+                    <br>
+                    <span class="player-symbol">O</span>
+                </div>
             </div>
-        </form>
+            <div class="start-button-container">
+                <button class="start-button">Start</button>
+            </div>
+        </div>
     </dialog>
     <dialog class="end-dialog">
         <form>
