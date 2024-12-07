@@ -96,11 +96,13 @@ const game = (function () {
                 display.updateDisplay(`${playerTwo.name} wins!`);
             }
             if (winner) {
+                display.end();
                 return;
             }
         } 
         if (round > 9) {
             display.updateDisplay(`It's a draw!`);
+            display.end();
             return;
         }
         display.updateDisplay(`It's ${currentPlayer.name}'s turn!`);
@@ -145,7 +147,7 @@ const display = (function () {
                 cells[index].addEventListener("click", mark);
             }
         }
-        const restartBtn = document.querySelector(".restart");
+        const restartBtn = document.querySelector(".restart.mid");
         restartBtn.addEventListener("click", start);
     }
 
@@ -157,7 +159,18 @@ const display = (function () {
             cells[i].textContent = board[i];
         }
     }
-    return {start, updateDisplay};
+
+    function end() {
+        const endDialog = document.querySelector(".end-dialog");
+        endDialog.showModal();
+        const restartBtn = document.querySelector(".restart.end");
+        restartBtn.addEventListener("click", () => {
+            endDialog.close();
+            start();
+        });
+    }
+
+    return {start, updateDisplay, end};
 })();
 
 display.start();
