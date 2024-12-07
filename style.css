@@ -51,19 +51,19 @@ body {
     cursor: pointer;
 }
 
-.top.cell {
+.cell.row-1 {
     border-top: none;
 }
 
-.right.cell {
+.cell.col-3 {
     border-right: none;
 }
 
-.bottom.cell {
+.cell.row-3 {
     border-bottom: none;
 }
 
-.left.cell {
+.cell.col-1 {
     border-left: none;
 }
 
