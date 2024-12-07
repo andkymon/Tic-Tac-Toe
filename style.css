@@ -1,17 +1,60 @@
 /*Self-Hosted Fonts*/
 @font-face {
-    font-family: logo;
-    src: url("assets/fonts/logo.woff2") format('woff2');
+    font-family: Fugaz One;
+    src: url("assets/fonts/FugazOne.woff2") format('woff2');
   }
   
 @font-face {
-font-family: open-sans;
-src: url("assets/fonts/opensans.woff2") format('woff2');
+    font-family: Montserrat;
+    src: url("assets/fonts/Montserrat.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: Fredoka;
+    src: url("assets/fonts/Fredoka.woff2") format('woff2');
+}
+
+/*
+Josh's Custom CSS Reset
+https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+}
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+    display: inline-block;
+    max-width: 100%;
+}
+input, button, textarea, select {
+    font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+p {
+    text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
 }
 
 /*Variables*/
 :root {
-    --board-size: 500px;
+    --board-size: 200px;
+    --background-color: #7CE8F7;
+    --primary-color: #FFFA6A;
+    --input-bg-color: #67F3CC;
+    --input-text-color: #5A3F6D;
+    --button-bg-color: #FFA8A8;
+    --shadow-color: gray;
 }
 
 body {
@@ -66,4 +109,88 @@ body {
 .cell.col-1 {
     border-left: none;
 }
+
+.start-dialog {
+    background-color: var(--background-color); 
+    color: var(--primary-color); 
+    border: none;
+    margin: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+    text-align: center;
+}
+
+.start-dialog h1 {
+    text-shadow: 0 8px 8px var(--shadow-color); 
+    font-family: Fugaz One, sans-serif;
+    font-size: clamp(0px, 12vw, 8rem);
+    text-wrap: nowrap;
+}
+
+.start-dialog > .container {
+    height: 100vh;
+    width: 100vw;
+    padding: 64px;
+    display: grid;
+    place-content: center;
+    gap: 128px;
+}
+
+.players-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 64px;
+}
+
+.input-container > * {
+    font-family: Montserrat, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.input-container > input {
+    width: 320px;
+    border-radius: 16px;
+    text-align: center;
+    border: none;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    box-shadow: 0px 2px 4px inset var(--shadow-color);
+    margin-bottom: 8px;
+}
+
+.input-container > input:hover {
+    transform: scale(1.2);
+    transition:0.3s;
+}
+
+.input-container > input:focus {
+    transform: scale(1.1);
+    transition:0.3s;
+}
+
+.input-container > span {
+    text-shadow: 0 4px 4px var(--shadow-color);
+    font-family: Fredoka, sans-serif;
+}
+
+.start-button {
+    text-shadow: 0 4px 4px var(--shadow-color);
+    box-shadow: 0 4px 4px var(--shadow-color);
+    background-color: var(--button-bg-color);
+    color: var(--primary-color);
+    border: 0;
+    border-radius: 16px;
+    font-family: Fugaz One, sans-serif;
+    font-size: 2rem;
+    padding: 16px 32px;
+}
+
+.start-button:hover, .start-button:focus {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition:0.3s;
+}
+
 
